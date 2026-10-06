@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notely — Glassmorphic Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient background glow elements -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="app-wrapper">
+    <div class="brand-header">
+      <div class="brand-icon">✦</div>
+      <h1 class="brand-name">Notely</h1>
+    </div>
+
+    <!-- AUTHENTICATION VIEW -->
+    <div id="authSection" class="glass-card">
+      <h2 id="authTitle" style="font-size: 20px; margin-bottom: 6px; text-align: center;">Welcome back</h2>
+      <p style="font-size: 13.5px; color: var(--text-dim); text-align: center; margin-bottom: 22px;">
+        Sign in to manage and view your workspace.
+      </p>
+
+      <div class="field-wrapper">
+        <label for="authEmail">Email</label>
+        <input type="email" id="authEmail" placeholder="your_email@gmail.com" />
+      </div>
+
+      <div class="field-wrapper">
+        <label for="authPassword">Password</label>
+        <input type="password" id="authPassword" placeholder="••••••••" />
+      </div>
+
+      <div class="action-row" style="margin-top: 20px;">
+        <button id="authBtn" class="btn-primary" onclick="handleAuth()">Sign In</button>
+      </div>
+
+      <p style="margin-top: 18px; text-align: center; font-size: 13.5px; color: var(--text-dim);">
+        <span id="switchText">Don't have an account?</span> 
+        <a href="#" onclick="toggleAuthMode()" id="switchLink" style="color: #818cf8; font-weight: 600; text-decoration: none;">Register</a>
+      </p>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div id="notesSection" class="hidden">
+      <div class="nav-header">
+        <div class="user-tag">
+          <span id="userGreeting">user@test.com</span>
+          <span id="roleBadge" class="badge-role hidden">OWNER</span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button id="toggleAdminBtn" class="btn-admin-nav hidden" onclick="toggleAdminPanel()">All Users & Notes</button>
+          <button class="btn-logout" onclick="logout()">Sign Out</button>
+        </div>
+      </div>
+
+      <!-- PERSONAL WORKSPACE -->
+      <div id="personalWorkspace">
+        <div class="glass-card">
+          <div class="field-wrapper">
+            <label for="noteTitle">Note Title</label>
+            <input type="text" id="noteTitle" placeholder="Project brainstorm" />
+          </div>
+
+          <div class="field-wrapper">
+            <label for="noteDesc">Description</label>
+            <textarea id="noteDesc" placeholder="Write thoughts or instructions here..."></textarea>
+          </div>
+
+          <div class="action-row">
+            <button id="submitBtn" class="btn-primary" onclick="submitNote()">Create Note</button>
+            <button id="cancelBtn" class="btn-secondary hidden" onclick="cancelEdit()">Cancel</button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 24px 4px 16px;">
+          <h2 style="font-size: 18px;">Your Notes</h2>
+          <span style="font-size: 12px; color: #a5b4fc;" id="notesCount">0 Notes</span>
+        </div>
+
+        <div id="notesContainer"></div>
+      </div>
+
+      <!-- ADMIN / OWNER PANEL -->
+      <div id="adminWorkspace" class="hidden">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h2 style="font-size: 20px; color: #f472b6;">Owner Overview</h2>
+            <p style="font-size: 13px; color: var(--text-dim);">Live snapshot of all registered users and their notes.</p>
+          </div>
+          <button class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="loadAdminOverview()">Refresh Data</button>
+        </div>
+        <div id="adminReportContainer"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- External JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
